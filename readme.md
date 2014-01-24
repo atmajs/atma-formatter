@@ -1,4 +1,7 @@
-Formatter Util
+##### MaskJS Formatter Util
+
+_part of the [Atma.js](http://atmajs.com) Project
+----
 
 Features:
 
@@ -10,8 +13,9 @@ Features:
 
 ### Date Formatter
 
-Placeholders:
 
+Placeholder | Description
+--- | ---
 `yyyy` | Full **Year** Number
 `yy` | Short **Year** Number
 `MM` | **Month** Number in 2 digits, e.g. '03'
@@ -62,14 +66,19 @@ Pattern: e.g. `,0.0`
 `0` | (optional) Fraction. When defined, the fraction part of the number is rounded to the specified zeros count
 
 Samples:
-`1234.123 ',00000.0'` | `01,234.1`
-`1234.123 '0'` | `1234`
-`1.5 '0.00'` | `01.50`
 
-Mask example:
+Value | Formatter | Result
+--- | --- | ---
+`1234.123` | `,00000.0` | `01,234.1`
+`1234.123` | `0` | `1234`
+`1.5` | `0.00` | `01.50`
+
+_Mask example_
+```css
 div > 'Sum - ~[format: sum, ",0.0"]'
 ```
-_javascript model_
+
+_Javascript model_
 ```javascript
 { sum: 4500.380 }
 ```
@@ -79,7 +88,7 @@ _Output_
 <div>Sum - 4,500.4</div>
 ```
 
-Javascript example:
+_Javascript example_
 ```javascript
 var str = mask.$utils.format(4500.380, ",0.0");
 //>  4,500.4
@@ -88,10 +97,12 @@ var str = mask.$utils.format(4500.380, ",0.0");
 ### String Formatter
 `{ index[,alignment][ :formatString] }`
 
-Mask example:
+_Mask example_
+```css
 div > '~[format: "Name: {0}; Born: {1:dd MMM yyyy}; Salary: ${2:,0.00}", user.name, user.birth, user.salary]'
 ```
-_javascript model_
+
+_Javascript model_
 ```javascript
 { user: { name: 'John', birth: new Date(1975, 0, 1), salary: 17000 } }
 ```
@@ -101,8 +112,8 @@ _Output_
 <div>Name: John; Born: 01 January 1975; Salary: $17,000.00</div>
 ```
 
-Javascript example:
+_Javascript example_
 ```javascript
 var str = mask.$utils.format("{0:,000}", 5.35);
 //>  005
-
+```

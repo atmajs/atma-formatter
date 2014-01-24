@@ -1,7 +1,8 @@
-##### MaskJS Formatter Util
+#### MaskJS Formatter Util
 
 _part of the [Atma.js](http://atmajs.com) Project
-----
+
+====
 
 Features:
 
@@ -60,6 +61,8 @@ var str = mask.$utils.format(new Date, "#d MMM, yyyy (hh:mm)");
 
 Pattern: e.g. `,0.0`
 
+Placeholder | Description
+--- | ---
 `,` | (optional) First char setts the integral part delimiter. Comma is used for default, which is defined by the current culture info.
 `0` | Then goes the integral part of the number. More Zeros can be specified for the minimal digit output
 `.` | (optional) Floating point. If omitted then the number is rounded to integer.

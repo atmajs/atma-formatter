@@ -1,6 +1,7 @@
 #### MaskJS Formatter Util
+[![Build Status](https://travis-ci.org/atmajs/util-format.png?branch=master)](https://travis-ci.org/atmajs/util-format)
 
-_part of the [Atma.js](http://atmajs.com) Project
+_part of the [Atma.js](http://atmajs.com) Project_
 
 ====
 

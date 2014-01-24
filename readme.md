@@ -74,27 +74,27 @@ Value | Formatter | Result
 --- | --- | ---
 `1234.123` | `,00000.0` | `01,234.1`
 `1234.123` | `0` | `1234`
-`1.5` | `0.00` | `01.50`
+`1.5` | `00.00` | `01.50`
 
 _Mask example_
 ```css
-div > 'Sum - ~[format: sum, ",0.0"]'
+div > 'Sum - ~[format: sum, ",0.00"]'
 ```
 
 _Javascript model_
 ```javascript
-{ sum: 4500.380 }
+{ sum: 4500.3851 }
 ```
 
 _Output_
 ```html
-<div>Sum - 4,500.4</div>
+<div>Sum - 4,500.39</div>
 ```
 
 _Javascript example_
 ```javascript
-var str = mask.$utils.format(4500.380, ",0.0");
-//>  4,500.4
+var str = mask.$utils.format(4500.3851, ",0.00");
+//>  4,500.39
 ```
 
 ### String Formatter

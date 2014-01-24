@@ -1,0 +1,30 @@
+
+require('../node_modules/atma-libs/globals-dev');
+
+include
+    .js([
+        '/lib/format.js'
+    ])
+    .done(function(resp){
+        eq(typeof mask.$utils.format, 'function');
+        
+        var src;
+        
+        src = mask.render('div > "~[format: \'`{0}-{1}-{0}`\', foo, bar]"', { foo: 'foo', bar: 'bar' });
+        eq(src, '<div>`foo-bar-foo`</div>');
+        
+        // DATE
+        src = mask.render('div > "~[format: \'`{0:yyyy}`\', date]"', { date: new Date(2014, 0 , 1) });
+        eq(src, '<div>`2014`</div>');
+        
+        src = mask.render('div > "~[format: date, \'yyyy\']"', { date: new Date(2014, 0 , 1) });
+        eq(src, '<div>2014</div>');
+        
+        // NUMBER
+        src = mask.render('div > "~[format: \'`{0:,0.00}`\', number]"', { number: 12345.1 });
+        eq(src, '<div>`12,345.10`</div>');
+        
+        src = mask.render('div > "~[format: number, \',0.00\']"', { number: 12345.1 });
+        eq(src, '<div>12,345.10</div>');
+        
+    });

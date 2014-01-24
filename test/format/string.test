@@ -1,0 +1,29 @@
+include
+    .inject([
+        '/src/lang/lang.js',
+        '/src/lang/en.js',
+        
+        '/src/utils/is.js',
+        '/src/utils/date.js',
+        '/src/utils/number.js',
+        '/src/utils/string.js'
+    ])
+    .done(function(){
+        
+        
+        UTest({
+            'format string': function(){
+                
+                var date = new Date(2014, 0, 1, 9, 0, 0);
+                
+                eq(str_format('! {0:yyyy-MM-dd hh:mm:ss}', date), '! 2014-01-01 09:00:00');
+                eq(str_format('- {0} - {1} - {2}', 1, '2', {
+                    toString: function(){
+                        return 3;
+                    }
+                }), '- 1 - 2 - 3');
+                
+                eq(str_format('|{0:yy}|{1,-5}|{2:,0.00}', date, 'f', 1234), '|14|f    |1,234.00');
+            }
+        })
+    })

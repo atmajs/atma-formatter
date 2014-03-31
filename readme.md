@@ -5,10 +5,10 @@
 
 Features:
 
-- [Date Formatter](#dateformatter)
-- [Number Formatter](#numberformatter)
-- [String Formatter](#stringformatter)
-- [Different Languages and Cultures](internationalization)
+- [Date Formatter](#date-formatter)
+- [Number Formatter](#number-formatter)
+- [String Formatter](#string-formatter)
+- [Different Languages and Cultures](#internationalization)
 - MaskJS util support
 
 

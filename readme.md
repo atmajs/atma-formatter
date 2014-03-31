@@ -1,7 +1,5 @@
-#### MaskJS Formatter Util
+#### Formatter Library
 [![Build Status](https://travis-ci.org/atmajs/util-format.png?branch=master)](https://travis-ci.org/atmajs/util-format)
-
-_part of the [Atma.js](http://atmajs.com) Project_
 
 ====
 
@@ -10,8 +8,9 @@ Features:
 - [Date Formatter](#dateformatter)
 - [Number Formatter](#numberformatter)
 - [String Formatter](#stringformatter)
-- Different Languages and Cultures
-- Mask and Javascript usage
+- [Different Languages and Cultures](internationalization)
+- MaskJS util support
+
 
 ### Date Formatter
 
@@ -37,9 +36,16 @@ Placeholder | Description
 `ss` | **Seconds** in 2 digits
 `#s` | **Seconds** in on or 2 digits
 
+Standalone NodeJS example:
+```javascript
+var format = require('atma-formatter');
+var str = format(new Date, "#d MMM, yyyy (hh:mm)");
+//>  1 January, 2014 (09:55)
+```
+
 Mask example:
 _mask_
-```css
+```sass
 div > 'Today - ~[format: today, "#d MMM, yyyy (hh:mm)"]'
 ```
 _javascript model_
@@ -77,6 +83,14 @@ Value | Formatter | Result
 `1234.123` | `0` | `1234`
 `1.5` | `00.00` | `01.50`
 
+
+Standalone NodeJS example:
+```javascript
+var format = require('atma-formatter');
+var str = format(4500.3851, ",0.00");
+//>  4,500.39
+```
+
 _Mask example_
 ```css
 div > 'Sum - ~[format: sum, ",0.00"]'
@@ -101,6 +115,20 @@ var str = mask.$utils.format(4500.3851, ",0.00");
 ### String Formatter
 `{ index[,alignment][ :formatString] }`
 
+
+Standalone NodeJS example:
+```javascript
+var format = require('atma-formatter');
+var str = format(
+	"Name: {0}; Born: {1:dd MMM yyyy}; Salary: ${2:,0.00}",
+	'John',
+	new Date(1975, 0, 1),
+	17000
+);
+//>  Name: John; Born: 01 January 1975; Salary: $17,000.00
+```
+
+
 _Mask example_
 ```css
 div > '~[format: "Name: {0}; Born: {1:dd MMM yyyy}; Salary: ${2:,0.00}", user.name, user.birth, user.salary]'
@@ -121,3 +149,28 @@ _Javascript example_
 var str = mask.$utils.format("{0:,000}", 5.35);
 //>  005
 ```
+
+
+### Internationalization
+There are already `EN` and `DE` support.
+
+Add culture support sample:
+```javascript
+var formatter = require('atma-formatter');
+formatter.Lang.$register('ru', {
+	MONTH: ['Январь',...],
+	MONTH_SHORT: ['Ян.',...],
+	DAY: ['Воскресенье',...],
+	DAY_SHORT: ['Bc',...],
+
+	NUMBER: {
+		// 1 000 000,00
+		Delimiter: ' ',
+		Point: ','
+	}
+});
+formatter.Lang.$use('ru');
+```
+
+----
+(c) MIT - Atma.js Project

@@ -12,10 +12,8 @@
 	
 	
 	// import /src/lang/lang.js
-	// import /src/lang/en.js
-	// import /src/lang/de.js
 	
 	
 	// import /src/format.js
-	
+	// import /src/exports.js
 }));

@@ -23,8 +23,9 @@ function Formatter(mix) {
     };
 }
 
-mask.registerUtil('format', {
-    
-    arguments: 'parsed',
-    process: Formatter
-});
+if (mask != null) {
+    mask.registerUtil('format', {
+        arguments: 'parsed',
+        process: Formatter
+    });
+}

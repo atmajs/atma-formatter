@@ -8,7 +8,7 @@ var date_format;
 	date_format = function(date, format, cultureInfo) {
 
 		_date = date;
-		_cultureInfo = cultureInfo || Lang[lang_DEFAULT];
+		_cultureInfo = cultureInfo || Lang[lang_isoCode];
 
 		format = format
 			.replace('Mm', Mm)

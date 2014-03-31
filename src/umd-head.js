@@ -6,7 +6,9 @@
 
 	if (typeof Mask !== 'undefined')
 		_mask = Mask;
-
+	if (typeof mask !== 'undefined') 
+		_mask = mask;
+	
 	if (_mask == null && root)
 		_mask = root.mask || (root.atma && root.atma.mask);
 
@@ -16,11 +18,16 @@
 
 	function construct() {
 
-		return factory(_global, mask || _mask);
+		return factory(_global, _mask);
 	};
 
 	// Browser OR Node
-	return construct();
+	var Formatter = construct();
+	
+	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') 
+		module.exports = Formatter;
+	
+	return Formatter;
 
 }(this, function(global, mask) {
 	'use strict';

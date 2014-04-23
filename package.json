@@ -1,6 +1,6 @@
 {
     "name": "atma-formatter",
-    "version": "0.8.4",
+    "version": "0.8.5",
     "description": "Formatter Util",
     "main": "lib/format.min.js",
     "scripts": {
@@ -15,8 +15,11 @@
     ],
     "author": "Alex Kit (alex.kit@atmajs.com)",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/atmajs/util-format.git"
+    },
     "devDependencies": {
-        "atma": "latest",
-        "atma-libs": "latest"
+        "atma": "latest"
     }
 }

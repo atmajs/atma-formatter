@@ -56,14 +56,15 @@ var number_format;
 		if (fractionCount != null && fractionCount > str.length - pointIndex - 1)
 			str = str + repeat('0', fractionCount - (str.length - pointIndex + 1));
 
-
-
 		if (!hasDelimiter)
 			return str.replace('.', NUMBER.Point);
 
 		// format integral part
 		pointIndex = str.indexOf('.');
 
+		if (fraction == null) 
+			return number_formatIntegralPart(str, delimiter);
+			
 		if (pointIndex <= 3)
 			return str.replace('.', NUMBER.Point);
 

@@ -11,6 +11,13 @@ Features:
 - [Different Languages and Cultures](#internationalization)
 - MaskJS util support
 
+#### Usage
+###### NodeJS
+```javascript
+var Formatter = require('atma-formatter');
+```
+###### Browser
+- [examples](examples)
 
 ### Date Formatter
 
@@ -171,6 +178,20 @@ formatter.Lang.$register('ru', {
 });
 formatter.Lang.$use('ru');
 ```
+
+#### Build, Test
+- Build
+
+	```bash
+	$ npm install atma -g
+	$ atma
+	```
+
+- Test
+
+	```bash
+	$ atma test
+	```
 
 ----
 (c) MIT - Atma.js Project

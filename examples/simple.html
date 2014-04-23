@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		
+		<script src='../lib/format.js'></script>
+		<script>
+			
+			var string = Formatter(
+				'Hello {0}, at {1:yyyy} with {2:,0}',
+				'World',
+				new Date(2014, 0,1),
+				5000
+			);
+			document.body.insertAdjacentHTML(
+				'beforeend',
+				'<span class="string">' + string + '</span>'
+			);
+		</script>
+	</body>
+</html>

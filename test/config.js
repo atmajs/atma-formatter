@@ -1,4 +1,12 @@
 module.exports = {
-    exec: 'node',
-    tests: 'test/**.test'
+    suites: {
+        'node': {
+            exec: 'node',
+            tests: 'test/*.test'
+        },
+        'examples': {
+            exec: 'dom',
+            tests: 'test/examples/**.test'
+        }
+    }
 };

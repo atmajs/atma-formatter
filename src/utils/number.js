@@ -13,11 +13,9 @@ var number_format;
 				,
 
 			hasDelimiter = !char_isNumber(format.charCodeAt(0)),
-
 			parts, integral, fraction, fractionCount,
-
-			delimiter, point, pointIndex, str;
-
+			delimiter, point, pointIndex, str
+			;
 		if (hasDelimiter) {
 			delimiter = format[0];
 			format = format.substring(1);

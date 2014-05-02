@@ -1,0 +1,15 @@
+include
+    .inject([
+       
+        '/src/utils/string.js'
+    ])
+    .done(function(){
+        
+        
+        UTest({
+            'alignment': function(){
+                eq_(str_format('x{0,10}x' , 'Q'), 'x         Qx');
+				eq_(str_format('x{0,-10}x', 'Q'), 'xQ         x');
+            }
+        })
+    })

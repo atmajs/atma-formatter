@@ -4,8 +4,10 @@ include
         '/src/lang/en.js',
         
         '/src/utils/is.js',
+        '/src/utils/obj.js',
         '/src/utils/date.js',
         '/src/utils/number.js',
+        '/src/utils/pluralizer.js',
         '/src/utils/string.js'
     ])
     .done(function(){
@@ -16,14 +18,30 @@ include
                 
                 var date = new Date(2014, 0, 1, 9, 0, 0);
                 
-                eq(str_format('! {0:yyyy-MM-dd hh:mm:ss}', date), '! 2014-01-01 09:00:00');
-                eq(str_format('- {0} - {1} - {2}', 1, '2', {
+                eq_(str_format('! {0:yyyy-MM-dd hh:mm:ss}', date), '! 2014-01-01 09:00:00');
+                return;
+                eq_(str_format('- {0} - {1} - {2}', 1, '2', {
                     toString: function(){
                         return 3;
                     }
                 }), '- 1 - 2 - 3');
                 
-                eq(str_format('|{0:yy}|{1,-5}|{2:,0.00}', date, 'f', 1234), '|14|f    |1,234.00');
-            }
+                eq_(str_format('|{0:yy}|{1,-5}|{2:,0.00}', date, 'f', 1234), '|14|f    |1,234.00');
+            },
+            
+            'property accessor': function(){
+                var val = str_format('_ {name}, {name.length}', {
+                    name: 'Baz'
+                });
+                eq_(val, '_ Baz, 3');
+            },
+            'pluralized nested': function(){
+                var val = str_format('_ {num; 0:Foo; 1: Quz {name};}', {
+                    num: 1,
+                    name: 'Baz'
+                });
+                
+				eq_(val, '_ Quz Baz');
+			}
         })
     })

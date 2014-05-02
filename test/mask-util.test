@@ -1,12 +1,12 @@
 
-require('../node_modules/atma-libs/globals-dev');
+require('../lib/format');
 
 include
     .js([
         '/lib/format.js'
     ])
     .done(function(resp){
-        eq(typeof mask.$utils.format, 'function');
+        eq_(typeof mask.$utils.format, 'function');
         
         var src;
         

@@ -120,7 +120,68 @@ var str = mask.$utils.format(4500.3851, ",0.00");
 ```
 
 ### String Formatter
-`{ index[,alignment][ :formatString] }`
+`{ accessor[,alignment][:pattern][;switch] }`
+
+- `accessor`: argument index or dot-notated property
+	
+	```javascript
+	/* index */
+	format('Hello {0} - {1} {0}', 'World', 'my')
+	//> 'Hello World, my World'
+	
+	/* property */
+	format('Hello {name} - {stats.qux}', {
+		name: 'Bar',
+		stats: {
+			qux: 20
+		}
+	});
+	//> 'Hello Bar - 20'
+	```
+- `alignment`: minimum chars count with right/left alignment
+
+	```javascript
+	format('x{0,10}x', 'Q');
+	//> 'x         Qx'
+	format('x{0,-10}x', 'Q');
+	//> 'xQ         x'
+	
+	```
+	
+- `pattern`: date or number pattern to format the accessed value
+	
+	```javascript
+	format('Year: {date:yyyy}', { date: new Date(2015, 0, 1)});
+	//> Year: 2015
+	```
+- `pluralization`: `pattern:value;otherPattern:value; ...` use other value according to the accessed number
+	_[i18n](https://github.com/atmajs/i18n) benefits of this feature_
+	
+	- Number patterns:
+		- Strict and Ending patterns: `12`, `*12`
+		- Ranges: `12-16`, `*12-16`
+		- Groups: `0,1,2`
+		- Any: `*`
+		
+	```javascript
+	format('{num; 0:Foo; 1,2:Baz {name}}', {
+		num: 2,
+		name: 'Qux'
+	})
+	//> 'Baz Qux'
+	
+	// i18n, e.g. russian has 3 plural forms. 'N day(s)' sample
+	format('{days} {days; *0,*11-14,*5-9: дней; *1: день; *2-4:дня }, {
+		days: 21
+	})
+	//> '21 день'
+	
+	// It is also possible to move pluralization pattern to the cultureInfo.
+	// then it would be
+	format('{days} {days; день, дня, дней }, {
+		days: 21
+	})
+	```
 
 
 Standalone NodeJS example:

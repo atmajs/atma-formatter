@@ -1,6 +1,6 @@
-#### Formatter Library
+#### Formatter Library (_NodeJS and Browser_)
 [![Build Status](https://travis-ci.org/atmajs/util-format.png?branch=master)](https://travis-ci.org/atmajs/util-format)
-
+[![NPM version](https://badge.fury.io/js/atma-formatter.svg)](http://badge.fury.io/js/atma-formatter)
 ====
 
 Features:
@@ -154,7 +154,7 @@ var str = mask.$utils.format(4500.3851, ",0.00");
 	format('Year: {date:yyyy}', { date: new Date(2015, 0, 1)});
 	//> Year: 2015
 	```
-- `pluralization`: `pattern:value;otherPattern:value; ...` use other value according to the accessed number
+- `switch/pluralization`: `pattern:value;otherPattern:value; ...` use other value according to the accessed number.
 	_[i18n](https://github.com/atmajs/i18n) benefits of this feature_
 	
 	- Number patterns:
@@ -171,7 +171,7 @@ var str = mask.$utils.format(4500.3851, ",0.00");
 	//> 'Baz Qux'
 	
 	// i18n, e.g. russian has 3 plural forms. 'N day(s)' sample
-	format('{days} {days; *0,*11-14,*5-9: дней; *1: день; *2-4:дня }, {
+	format('{days} {days; *0,*11-14,*5-9: дней; *1: день; *2-4:дня }', {
 		days: 21
 	})
 	//> '21 день'
@@ -181,6 +181,7 @@ var str = mask.$utils.format(4500.3851, ",0.00");
 	format('{days} {days; день, дня, дней }, {
 		days: 21
 	})
+	//> '21 день'
 	```
 
 

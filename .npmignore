@@ -1,0 +1,8 @@
+builds/
+examples/
+src/
+test/
+tools/
+build.js
+*.komodoproject
+

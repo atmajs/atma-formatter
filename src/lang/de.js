@@ -39,6 +39,8 @@
 		NUMBER: {
 			Delimiter: '.',
 			Point: ','
-		}
+		},
+		
+		Pluralize: '1:0; *:1'
 	});
 }());

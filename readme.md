@@ -124,7 +124,7 @@ var str = mask.$utils.format(4500.3851, ",0.00");
 ### String Formatter
 #### `{ accessor[,alignment][:pattern][;switch] }`
 
-- `accessor`: argument index or dot-notated property
+- `accessor`: index or dot-notated property
 	
 	```javascript
 	/* index */
@@ -150,13 +150,13 @@ var str = mask.$utils.format(4500.3851, ",0.00");
 	
 	```
 	
-- `pattern`: date or number pattern to format the accessed value
+- `pattern`: `Date` `Number` format patterns. Refer to [Date Formatter](#date-formatter) and [Number Formatter](#number-formatter)
 	
 	```javascript
 	format('Year: {date:yyyy}', { date: new Date(2015, 0, 1)});
 	//> Year: 2015
 	```
-- `switch/pluralization`: `pattern:value;otherPattern:value; ...` use other value according to the accessed number.
+- `switch/pluralization`: `pattern:string;otherPattern:string; ...` Choose interpolated string according to arguments value. Each string can contain nested interpolations.
 	_[i18n](https://github.com/atmajs/i18n) benefits of this feature_
 	
 	- Number patterns:

@@ -6,6 +6,7 @@
 	
 	// import /src/utils/is.js
 	// import /src/utils/obj.js
+	// import /src/utils/cursor.js
 	// import /src/utils/date.js
 	// import /src/utils/number.js
 	// import /src/utils/string.js

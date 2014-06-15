@@ -16,6 +16,7 @@ var str_format,
 		var out = '',
 			i = 0,
 			last = 0,
+			lastAccessor = -1,
 			x;
 
 		while ((i = str.indexOf('{', i)) !== -1) {
@@ -29,54 +30,36 @@ var str_format,
 
 			out += str.substring(last, i);
 			last = i + 1;
-			i = cursor_moveToEnd(str, i);
+			i = cursor_moveToEnd(str, i, 123/*{*/, 125/*}*/);
 
 			if (i === -1)
 				break;
 
-			x = new Interpolator(str.substring(last, i))
+			x = new Interpolator(str.substring(last, i));
+			switch(x.accessorType){
+				case 'index':
+					if (lastAccessor < x.accessor) 
+						lastAccessor = x.accessor;
+					break;
+				case 'property':
+					if (lastAccessor === -1) 
+						lastAccessor = 0;
+					break;
+			}
 			out += x.process(args, cultureInfo);
 			last = i + 1;
 		}
 
 		if (last < str.length)
 			out += str.substring(last);
-
-		return out;
+		
+		
+		return ++lastAccessor < args.length
+			? printf(out, args.slice(lastAccessor))
+			: out
+			;
 	}
 	
-	function cursor_moveToEnd(str, i) {
-		var stack = 0,
-			imax = str.length,
-			c;
-		
-		while(i < imax){
-			c = str.charCodeAt(++i);
-			if (c === 92) {
-				// \ skip nextChar
-				i++;
-				continue;
-			}
-			
-			if (c === 123) {
-				// {
-				stack++;
-				continue;
-			}
-			if (c === 125) {
-				// }
-				
-				if (--stack < 0)
-					break;
-			}
-		}
-		
-		if (i === imax || stack > -1) 
-			return -1;
-		
-		return i;
-	}
-
 	
 	var Interpolator;
 	(function() {
@@ -172,7 +155,6 @@ var str_format,
 			instance.alignment = matches[i_ALIGN] || null;
 			instance.pattern = matches[i_PATTERN] || null;
 			instance.pluralizer = matches[i_PLURALIZER] || null;
-			
 		}
 		
 		// alignment
@@ -200,4 +182,27 @@ var str_format,
 
 	}());
 
+	function printf(str, args) {
+		var out = str,
+			rgx_format = /%s|%d/,
+			hasFormat = rgx_format.test(str),
+			i = -1,
+			imax = args.length,
+			x;
+		
+		while ( ++i < imax ){
+			x = args[i];
+		
+			if (hasFormat === true && (i === 0 || rgx_format.test(out))) {
+				out = out.replace(rgx_format, x);
+				continue;
+			}
+
+			if (out !== '')
+				out += ' ';
+
+			out += x;
+		}
+		return out;
+	}
 }());

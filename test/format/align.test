@@ -1,6 +1,6 @@
 include
     .inject([
-       
+		'/src/utils/cursor.js',       
         '/src/utils/string.js'
     ])
     .done(function(){

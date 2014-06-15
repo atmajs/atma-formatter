@@ -9,7 +9,7 @@ Features:
 
 - [Date Formatter](#date-formatter)
 - [Number Formatter](#number-formatter)
-- [String Formatter](#string-formatter)
+- [String Formatter](#string-formatter) (_format, align, pluralize_)
 - [Different Languages and Cultures](#internationalization)
 - MaskJS util support
 
@@ -122,7 +122,7 @@ var str = mask.$utils.format(4500.3851, ",0.00");
 ```
 
 ### String Formatter
-`{ accessor[,alignment][:pattern][;switch] }`
+#### `{ accessor[,alignment][:pattern][;switch] }`
 
 - `accessor`: argument index or dot-notated property
 	

@@ -37,29 +37,34 @@ var pluralize;
 			index = -1,
 			last = 0,
 			imax = string.length,
-			pare;
+			pare, c;
+		
+		while ( ++i < imax ){
+			c = string.charCodeAt(i);
 			
-		while ((index = string.indexOf(';', index)) !== -1){
-			
-			if (string.charCodeAt(index) === 92) {
+			if (92 === c) {
 				// \ 
-				index++;
+				++i;
 				continue;
 			}
 			
-			pare = string.substring(last, index);
-			last = index = index + 1;
-			
-			if (pare) 
-				this.items.push(parse_pluralizedItem(pare));
+			if (123 === c) {
+				i = cursor_moveToEnd(string, i, 123/*{*/, 125/*}*/);
+				
+				if (i === -1) 
+					break;
+			}
+			if (59 === c) {
+				pare = string.substring(last, i);
+				last = i = i + 1;
+				if (pare !== '') 
+					this.items.push(parse_pluralizedItem(pare));
+			}
 		}
-		
-		
 		pare = string.substring(last);
-		if (pare) 
+		if (pare !== '') 
 			this.items.push(parse_pluralizedItem(pare));
 			
-		
 	};
 	PluralizedPattern.prototype.getValue = function(num, culturInfo){
 		var i = -1,

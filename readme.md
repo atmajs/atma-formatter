@@ -3,6 +3,7 @@
 ----
 [![Build Status](https://travis-ci.org/atmajs/util-format.png?branch=master)](https://travis-ci.org/atmajs/util-format)
 [![NPM version](https://badge.fury.io/js/atma-formatter.svg)](http://badge.fury.io/js/atma-formatter)
+[![Bower version](https://badge.fury.io/bo/atma-formatter.svg)](http://badge.fury.io/bo/atma-formatter)
 
 
 Features:

@@ -82,8 +82,8 @@ Placeholder | Description
 --- | ---
 `,` | (optional) First char setts the integral part delimiter. Comma is used for default, which is defined by the current culture info.
 `0` | Then goes the integral part of the number. More Zeros can be specified for the minimal digit output
-`.` | (optional) Floating point. If omitted then the number is rounded to integer.
-`0` | (optional) Fraction. When defined, the fraction part of the number is rounded to the specified zeros count
+`.` | (optional) Floating point. If omitted then the number is rounded to integer. When no zeros follow the point, faction will be printed as is.
+`0` | (optional) Fraction. When defined, the fraction part of the number is rounded to the specified zeros count. When zeros in pattern are taken in parenthese, then trailing zeros will be removed from result.
 
 Samples:
 
@@ -92,6 +92,9 @@ Value | Formatter | Result
 `1234.123` | `,00000.0` | `01,234.1`
 `1234.123` | `0` | `1234`
 `1.5` | `00.00` | `01.50`
+`3.145` | `00.` | `03.145`
+`3.4` | `0.(000)` | `3.4`
+`3.4566` | `0.(000)` | `3.457`
 
 
 Standalone NodeJS example:

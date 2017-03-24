@@ -5,7 +5,7 @@ var number_format;
 	number_format = function(number_, pattern, cultureInfo) {
 		// NUMER { Delimiter, Point, Default }
 
-		var NUMBER_DEF = typeof Land !== 'undefined' ? Lang.$get('NUMBER') : null,
+		var NUMBER_DEF = typeof Lang !== 'undefined' ? Lang.$get('NUMBER') : null,
 			NUMBER = cultureInfo && cultureInfo.NUMBER || NUMBER_DEF,
 			DELIMITER = NUMBER.Delimiter || NUMBER_DEF.Delimiter,
 			POINT = NUMBER.Point || NUMBER_DEF.Point,

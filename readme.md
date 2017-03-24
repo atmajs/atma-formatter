@@ -1,7 +1,7 @@
 #### Formatter Library (_NodeJS and Browser_)
 
 ----
-[![Build Status](https://travis-ci.org/atmajs/util-format.png?branch=master)](https://travis-ci.org/atmajs/util-format)
+[![Build Status](https://travis-ci.org/atmajs/atma-formatter.png?branch=master)](https://travis-ci.org/atmajs/atma-formatter)
 [![NPM version](https://badge.fury.io/js/atma-formatter.svg)](http://badge.fury.io/js/atma-formatter)
 [![Bower version](https://badge.fury.io/bo/atma-formatter.svg)](http://badge.fury.io/bo/atma-formatter)
 
@@ -70,7 +70,7 @@ _Output_
 
 Javascript example:
 ```javascript
-var str = mask.$utils.format(new Date, "#d MMM, yyyy (hh:mm)");
+var str = mask._.format(new Date, "#d MMM, yyyy (hh:mm)");
 //>  1 January, 2014 (09:55)
 ```
 
@@ -121,7 +121,7 @@ _Output_
 
 _Javascript example_
 ```javascript
-var str = mask.$utils.format(4500.3851, ",0.00");
+var str = mask._.format(4500.3851, ",0.00");
 //>  4,500.39
 ```
 
@@ -221,7 +221,7 @@ _Output_
 
 _Javascript example_
 ```javascript
-var str = mask.$utils.format("{0:,000}", 5.35);
+var str = mask._.format("{0:,000}", 5.35);
 //>  005
 ```
 
@@ -241,7 +241,10 @@ formatter.Lang.$register('ru', {
 	NUMBER: {
 		// 1 000 000,00
 		Delimiter: ' ',
-		Point: ','
+		Point: ',',
+		Default: string|number
+		// When number, then for NaN input the default value will be formatted
+		// When string, then it will be returned on NaN input
 	}
 });
 formatter.Lang.$use('ru');

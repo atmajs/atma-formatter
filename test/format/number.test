@@ -4,12 +4,13 @@ include
         
         
         UTest({
-            'format number': function(){
+            'should format numbers': function(){
                 
                 var cultureInfo = {
                     NUMBER: {
                         Delimiter: ',',
-                        Point: '.'
+                        Point: '.',
+                        Default: 0
                     }
                 };
                 
@@ -38,6 +39,19 @@ include
                 check(3.1, '0.(00)', '3.1');
                 check(3.1234, '0.(00)', '3.12');
                 check(3.6, '0', '4');
+            },
+            'should format default': function () {
+                var cultureInfo = {
+                    NUMBER: {
+                        Delimiter: ',',
+                        Point: '.',
+                        Default: 0
+                    }
+                };
+                function check(number, format, expect){
+                    eq_(number_format(number, format, cultureInfo), expect);
+                }
+                check({}, '000.0', '000.0');
             }
         })
     })

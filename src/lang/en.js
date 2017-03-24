@@ -58,7 +58,8 @@
 
 		NUMBER: {
 			Delimiter: ',',
-			Point: '.'
+			Point: '.',
+			Default: 0
 		},
 		
 		Pluralize: '1:0; *:1'

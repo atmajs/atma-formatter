@@ -2,18 +2,39 @@ var number_format;
 
 (function() {
 
-	number_format = function(number, format, cultureInfo) {
-		// { Delimiter, Point }
+	number_format = function(number_, pattern, cultureInfo) {
+		// NUMER { Delimiter, Point, Default }
 
-		var NUMBER = cultureInfo == null || cultureInfo.NUMBER == null
-				? Lang.$get('NUMBER')
-				: cultureInfo.NUMBER;
+		var NUMBER_DEF = typeof Land !== 'undefined' ? Lang.$get('NUMBER') : null,
+			NUMBER = cultureInfo && cultureInfo.NUMBER || NUMBER_DEF,
+			DELIMITER = NUMBER.Delimiter || NUMBER_DEF.Delimiter,
+			POINT = NUMBER.Point || NUMBER_DEF.Point,
+			DEFAULT = NUMBER.Default == null ? NUMBER_DEF.Default : NUMBER.Default;
 
-		var info = parseFormat(format),
+
+		var number = isNumber(number_) ? number_ : null;
+		if (number == null && typeof number_ === 'string') {
+			number = parseFloat(number_);			
+		}
+		if (isNumber(number) === false) {
+			number = DEFAULT;
+			if (typeof number === 'string') {
+				return number;
+			}
+		}
+		
+		return format(number, pattern, DELIMITER, POINT);
+	};
+
+	function isNumber (x) {
+		return typeof x === 'number' && x === x;
+	}
+	function format (number, pattern, delimiter, point) {
+		var info = parsePattern(pattern),
 			delimiter = info.delimiter;		
 		if (delimiter === ',')
 			// default delimiter - take from culture
-			delimiter = NUMBER.Delimiter;
+			delimiter = delimiter;
 
 		var str = info.fractionCount === Infinity
 			? (number).toString()
@@ -31,8 +52,8 @@ var number_format;
 		if (fractionFormatted == null || fractionFormatted === '') {
 			return integralFormatted;
 		}
-		return integralFormatted + NUMBER.Point + fractionFormatted;
-	};
+		return integralFormatted + point + fractionFormatted;
+	}
 
 	function formatIntegralPart (str_, delimiter, formatInfo) {
 		var minDigits = formatInfo.integral.length;	
@@ -77,56 +98,32 @@ var number_format;
 			return str;
 		}		
 		return repeat('0', minDigits - digits) + str; 
-	}
-
-	function number_formatIntegralPart(str, delimiter) {
-		return str
-			.replace(/^([\d]{0,2})(([\d]{3})*)$/, function(full, prefix, middle) {
-
-			var str = prefix ? prefix + delimiter : '';
-
-			return str + middle
-				.replace(/([\d]{3})/g, '$1' + delimiter)
-				.slice(0, -1);
-		});
-
-	}
-
+	}	
 	function char_isNumber(charCode) {
 		return charCode >= 48 && charCode <= 57;
 	}
-	function countDigits (int) {
-		if (int < 10) return 1;
-		if (int < 100) return 2;
-		if (int < 10000) return 3;
-		if (int < 100000) return 4;
-		if (int < 1000000) return 5;
-		return (int).toString().length;
-	}
-
 	function repeat(char_, count) {
 		var str = '';
 		while (--count > -1)
 			str += char_;
 		return str;
 	}
+	function parsePattern (pattern) {
+		if (cache_.hasOwnProperty(pattern))
+			return cache_[pattern];
 
-	function parseFormat (formatStr_) {
-		if (0 && cache_.hasOwnProperty(formatStr_))
-			return cache_[formatStr_];
-
-		var formatStr = formatStr_,
+		var patternStr = pattern,
 			delimiter,
-			hasDelimiter = !char_isNumber(formatStr.charCodeAt(0)),
+			hasDelimiter = !char_isNumber(patternStr.charCodeAt(0)),
 			index = 0;
 		if (hasDelimiter) {
-			delimiter = formatStr[0];
+			delimiter = patternStr[0];
 			index = 1;
 		}
 
-		var pointIndex = formatStr.indexOf('.'),		
-			integralPart = pointIndex === -1 ? formatStr : formatStr.substring(index, pointIndex),
-			fractionPart = pointIndex === -1 ? '' : formatStr.substring(pointIndex + 1),
+		var pointIndex = patternStr.indexOf('.'),		
+			integralPart = pointIndex === -1 ? patternStr : patternStr.substring(index, pointIndex),
+			fractionPart = pointIndex === -1 ? '' : patternStr.substring(pointIndex + 1),
 			fractionCount = 0,
 			fractionOptional = true;
 
@@ -142,14 +139,14 @@ var number_format;
 		} else if (pointIndex !== -1) {
 			fractionCount = Infinity;
 		}
-		var format = {
+		var patternObj = {
 			delimiter: delimiter,
 			integral: integralPart,
 			fraction: fractionPart,
 			fractionCount: fractionCount,
 			fractionOptional: fractionOptional
 		};		
-		return cache_[formatStr_] = format;
+		return cache_[pattern] = patternObj;
 	}
 	var cache_ = {};
 

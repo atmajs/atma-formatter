@@ -11,7 +11,8 @@ Features:
 - [Date Formatter](#date-formatter)
 - [Number Formatter](#number-formatter)
 - [String Formatter](#string-formatter) (_format, align, pluralize_)
-- [Different Languages and Cultures](#internationalization)
+- [Static Methods](#static-methods)
+- [Languages and Cultures](#internationalization)
 - MaskJS util support
 
 #### Usage
@@ -21,9 +22,11 @@ var Formatter = require('atma-formatter');
 ```
 ###### Browser
 - [examples](examples)
+```javascript
+window.Formatter
+```
 
 ### Date Formatter
-
 
 Placeholder | Description
 --- | ---
@@ -55,7 +58,7 @@ var str = format(new Date, "#d MMM, yyyy (hh:mm)");
 
 Mask example:
 _mask_
-```sass
+```mask
 div > 'Today - ~[format: today, "#d MMM, yyyy (hh:mm)"]'
 ```
 _javascript model_
@@ -184,7 +187,7 @@ var str = mask._.format(4500.3851, ",0.00");
 	
 	// It is also possible to move pluralization pattern to the cultureInfo.
 	// then it would be
-	format('{days} {days; день, дня, дней }, {
+	format('{days} {days; день, дня, дней }', {
 		days: 21
 	})
 	//> '21 день'
@@ -225,6 +228,16 @@ var str = mask._.format("{0:,000}", 5.35);
 //>  005
 ```
 
+### Static methods
+
+The `format` method takes the formatter by the input value. You can use  formatters directly. Formatters will also try to convert the input value to the desired type. For instance, when a `string` is passed to `formatDate` then we try to convert it to the `Date` instance.
+
+```javascript
+var Formatter = require('atma-formatter');
+Formatter.formatNumber(value, pattern, cultureInfo?);
+Formatter.formatString(value, pattern, cultureInfo?);
+Formatter.formatDate(value, pattern, cultureInfo?);
+```
 
 ### Internationalization
 There are already `EN` and `DE` support.

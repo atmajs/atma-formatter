@@ -23,6 +23,10 @@ function Formatter(mix) {
     };
 }
 
+Formatter.formatNumber = number_format;
+Formatter.formatString = str_format;
+Formatter.formatDate = date_format;
+
 if (mask != null) {
     mask.registerUtil('format', {
         arguments: 'parsed',

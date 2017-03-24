@@ -6,8 +6,23 @@ var date_format;
 		_cultureInfo /* { MONTH, MONTH_SHORT, DAY, DAY_SHORT } */ ;
 
 	date_format = function(date, format, cultureInfo) {
-
-		_date = date;
+		if (date == null) {
+			return '';
+		}
+		var type = typeof date;
+		switch (type) {
+			case 'string':
+			case 'number':
+				_date = new Date(date);
+				break;
+			default:
+				_date = date;
+				break;
+		}
+		if (isNaN(_date)) {
+			return '';
+		}
+		
 		_cultureInfo = cultureInfo || Lang[lang_isoCode];
 
 		format = format
@@ -33,9 +48,7 @@ var date_format;
 
 			.replace('ss', ss)
 			.replace('#s', $s)
-
 		;
-
 		return format;
 
 	};

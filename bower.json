@@ -1,6 +1,6 @@
 {
     "name": "atma-formatter",
-    "version": "0.8.11",
+    "version": "0.8.13",
     "homepage": "https://github.com/atmajs/util-format",
     "authors": [
         "Alex Kit <alex.kit@atmajs.com>"
